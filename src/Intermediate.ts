@@ -1,4 +1,4 @@
-import { Element } from "./Elements/Element";
+import { Element } from "./elements/Element";
 
 export class Intermediate {
     name: string;

@@ -1,6 +1,6 @@
-import { Element } from "./Elements/Element";
-import { createHeading } from "./Elements/Heading/HeadingFactory";
-import { createParagraph } from "./Elements/Paragraph/ParagraphFactory";
+import { Element } from "./elements/Element";
+import { createHeading } from "./elements/heading/HeadingFactory";
+import { createParagraph } from "./elements/paragraph/ParagraphFactory";
 import { Intermediate } from "./Intermediate";
 
 export function createIntermediate(

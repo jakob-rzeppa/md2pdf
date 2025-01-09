@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { parse, isInvalid } from "../../../Elements/Heading/HeadingFactory";
+import { parse, isInvalid } from "../../../elements/heading/HeadingFactory";
 
 suite("HeadingFactory", () => {
     suite("parse", () => {

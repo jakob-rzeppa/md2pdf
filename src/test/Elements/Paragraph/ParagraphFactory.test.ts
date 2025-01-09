@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { createParagraph } from "../../../Elements/Paragraph/ParagraphFactory";
+import { createParagraph } from "../../../elements/paragraph/ParagraphFactory";
 
 suite("ParagraphFactory", () => {
     test("expected input", () => {
