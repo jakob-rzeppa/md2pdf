@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 import PdfPrinter from "pdfmake";
 import { createWriteStream } from "fs";
 import { TDocumentDefinitions, TFontDictionary } from "pdfmake/interfaces";
+import { parseDocument } from "./parser";
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -27,6 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
 
             const document = activeTextEditor.document.getText();
 
+            const parsedDocument = parseDocument(document);
+
             // TODO: get it to work with relative paths
             var fonts: TFontDictionary = {
                 Roboto: {
@@ -43,31 +46,29 @@ export function activate(context: vscode.ExtensionContext) {
 
             var docDefinition: TDocumentDefinitions = {
                 content: [
-                    {
-                        text: "Header",
-                        style: "header",
-                    },
-                    {
-                        text: "Subheader",
-                        style: "subheader",
-                    },
-                    {
-                        text: "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines",
-                    },
-                    {
-                        text: "Subheader",
-                        style: "subheader",
-                    },
+                    parsedDocument.map((element) =>
+                        element.toTDocumentDefinitionContent()
+                    ),
                 ],
 
                 styles: {
-                    header: {
+                    header1: {
+                        fontSize: 30,
+                        bold: true,
+                        alignment: "center",
+                    },
+                    header2: {
                         fontSize: 24,
                         bold: true,
                         alignment: "center",
                     },
-                    subheader: {
+                    header3: {
                         fontSize: 18,
+                        bold: true,
+                        alignment: "center",
+                    },
+                    header4: {
+                        fontSize: 14,
                         bold: true,
                         alignment: "center",
                     },
