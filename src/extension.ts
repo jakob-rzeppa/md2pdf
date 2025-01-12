@@ -1,7 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { createIntermediate } from "./IntermediateFactory";
 import PdfPrinter from "pdfmake";
 import { createWriteStream } from "fs";
 import { TDocumentDefinitions, TFontDictionary } from "pdfmake/interfaces";
@@ -28,11 +27,6 @@ export function activate(context: vscode.ExtensionContext) {
 
             const document = activeTextEditor.document.getText();
 
-            const intermediate = createIntermediate(
-                activeTextEditor.document.fileName,
-                document
-            );
-
             // TODO: get it to work with relative paths
             var fonts: TFontDictionary = {
                 Roboto: {
@@ -50,10 +44,38 @@ export function activate(context: vscode.ExtensionContext) {
             var docDefinition: TDocumentDefinitions = {
                 content: [
                     {
-                        text: "Paragraphs can also by styled without using named-styles (this one sets fontSize to 25)",
-                        fontSize: 25,
+                        text: "Header",
+                        style: "header",
+                    },
+                    {
+                        text: "Subheader",
+                        style: "subheader",
+                    },
+                    {
+                        text: "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines",
+                    },
+                    {
+                        text: "Subheader",
+                        style: "subheader",
                     },
                 ],
+
+                styles: {
+                    header: {
+                        fontSize: 24,
+                        bold: true,
+                        alignment: "center",
+                    },
+                    subheader: {
+                        fontSize: 18,
+                        bold: true,
+                        alignment: "center",
+                    },
+                    paragraph: {
+                        fontSize: 12,
+                        alignment: "justify",
+                    },
+                },
             };
 
             var pdfDoc = printer.createPdfKitDocument(docDefinition);
