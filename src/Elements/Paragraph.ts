@@ -1,5 +1,10 @@
 import { Element } from "./Element";
 
+export interface TDocumentDefinitionContentParagraph {
+    text: string;
+    style: string;
+}
+
 export class Paragraph implements Element {
     text: string;
 
@@ -7,7 +12,7 @@ export class Paragraph implements Element {
         this.text = text;
     }
 
-    toTDocumentDefinitionContent(): { text: string; style: string } {
+    toTDocumentDefinitionContent(): TDocumentDefinitionContentParagraph {
         return {
             text: this.text,
             style: "paragraph",

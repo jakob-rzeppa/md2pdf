@@ -1,4 +1,10 @@
 import { Element } from "./Element";
+import { TDocumentDefinitionContentParagraph } from "./Paragraph";
+
+export interface TDocumentDefinitionContentHeader {
+    text: string;
+    style: string;
+}
 
 export class Header implements Element {
     text: string;
@@ -12,7 +18,7 @@ export class Header implements Element {
         this.text = text.replace(/#/g, "").trim();
     }
 
-    toTDocumentDefinitionContent(): { text: string; style: string } {
+    toTDocumentDefinitionContent(): TDocumentDefinitionContentHeader {
         return {
             text: this.text,
             style: "header" + this.level,
